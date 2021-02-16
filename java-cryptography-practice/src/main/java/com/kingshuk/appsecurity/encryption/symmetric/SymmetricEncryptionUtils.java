@@ -1,4 +1,4 @@
-package com.kingshuk.appsecurity.symmetric;
+package com.kingshuk.appsecurity.encryption.symmetric;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;

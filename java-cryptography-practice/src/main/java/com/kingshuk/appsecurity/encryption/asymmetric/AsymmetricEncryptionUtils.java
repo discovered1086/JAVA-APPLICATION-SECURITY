@@ -1,4 +1,4 @@
-package com.kingshuk.appsecurity.asymmetric;
+package com.kingshuk.appsecurity.encryption.asymmetric;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;

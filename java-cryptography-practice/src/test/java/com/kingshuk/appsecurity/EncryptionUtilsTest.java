@@ -12,8 +12,8 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 
-import static com.kingshuk.appsecurity.asymmetric.AsymmetricEncryptionUtils.*;
-import static com.kingshuk.appsecurity.symmetric.SymmetricEncryptionUtils.*;
+import static com.kingshuk.appsecurity.encryption.asymmetric.AsymmetricEncryptionUtils.*;
+import static com.kingshuk.appsecurity.encryption.symmetric.SymmetricEncryptionUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
