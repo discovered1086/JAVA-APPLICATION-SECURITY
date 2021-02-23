@@ -1,12 +1,12 @@
 package com.kingshuk.appsecurity;
 
+import com.kingshuk.appsecurity.hashing.HashUtils;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.DatatypeConverter;
 import java.util.UUID;
 
-import static com.kingshuk.appsecurity.hashing.HashUtils.createSHA256Hash;
-import static com.kingshuk.appsecurity.hashing.HashUtils.generateSalt;
+import static com.kingshuk.appsecurity.hashing.HashUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HashUtilsTest {
@@ -29,5 +29,14 @@ class HashUtilsTest {
 
         final byte[] sha256Hash2 = createSHA256Hash(valueToHash, salt);
         assertThat(DatatypeConverter.printHexBinary(sha256Hash)).isEqualTo(DatatypeConverter.printHexBinary(sha256Hash2));
+    }
+
+
+    @Test
+    void testPassword() throws Exception {
+        String password = "Iofdtiger#16";
+        final String hashPassword = HashUtils.hashPassword(password);
+        System.out.println("\n The hashed password is: " + hashPassword +"\n");
+        assertThat(verifyPassword(password, hashPassword)).isTrue();
     }
 }

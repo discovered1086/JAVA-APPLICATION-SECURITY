@@ -19,6 +19,10 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
 
+    // https://mvnrepository.com/artifact/de.svenkubiak/jBCrypt
+    implementation group: 'de.svenkubiak', name: 'jBCrypt', version: '0.4.3'
+
+
 
 }
 

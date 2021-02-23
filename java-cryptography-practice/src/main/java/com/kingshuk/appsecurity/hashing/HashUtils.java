@@ -1,5 +1,7 @@
 package com.kingshuk.appsecurity.hashing;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -30,5 +32,13 @@ public class HashUtils {
 
         MessageDigest messageDigest = MessageDigest.getInstance(HASHING_ALGORITHM);
         return messageDigest.digest(valueToHash);
+    }
+
+    public static String hashPassword(String password){
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    public static boolean verifyPassword(String password, String hashedPassword){
+        return BCrypt.checkpw(password, hashedPassword);
     }
 }
