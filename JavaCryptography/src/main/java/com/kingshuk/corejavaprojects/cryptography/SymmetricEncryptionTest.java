@@ -1,4 +1,4 @@
-package com.kingshuk.corejavaprojects.cryptography.packtcourse;
+package com.kingshuk.corejavaprojects.cryptography;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;

@@ -1,4 +1,4 @@
-package com.kingshuk.corejavaprojects.cryptography.packtcourse;
+package com.kingshuk.corejavaprojects.cryptography.hashing;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
