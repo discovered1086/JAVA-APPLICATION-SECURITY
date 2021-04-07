@@ -61,7 +61,7 @@ public class KeyStoreTest {
         keyStore.store(new FileOutputStream(keyStoreFile), password);
     }
 
-    public static Certificate generateCertificate(KeyPair keyPair) throws Exception {
+    private static Certificate generateCertificate(KeyPair keyPair) throws Exception {
         X500Name certName = new X500Name("cn=kings-cert");
         SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfo
                 .getInstance(keyPair.getPublic().getEncoded());
