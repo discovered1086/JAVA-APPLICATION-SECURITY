@@ -1,10 +1,9 @@
 package com.kingshuk.corejavaprojects.cryptography;
 
-import java.security.Key;
-import java.util.Base64;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
+import java.util.Base64;
 
 /**
  * Created with IntelliJ IDEA. User: co21321 Date: 10/26/15 Time: 2:54 PM To

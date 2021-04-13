@@ -1,10 +1,6 @@
 package com.kingshuk.corejavaprojects.cryptography;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
+import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -12,8 +8,11 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
-import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 public class SymmetricEncryptionTest {
 

@@ -1,11 +1,11 @@
 package com.kingshuk.corejavaprojects.cryptography.hashing;
 
+import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
 
 public class HashingWithoutSaltPracticeHarness {
 

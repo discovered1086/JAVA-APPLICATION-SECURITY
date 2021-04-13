@@ -1,12 +1,11 @@
 package com.kingshuk.corejavaprojects.cryptography.hashing;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-
-import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 public class HashingWithSaltPracticeHarness {
 

@@ -4,9 +4,8 @@ import com.kingshuk.corejavaprojects.cryptography.util.CryptographyUtil;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.util.Arrays;
 
-public class AsymmetricKeyEncryptionTest {
+public class KeyPairGenerationDemo {
 
     public static void main(String[] args) throws Exception{
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
