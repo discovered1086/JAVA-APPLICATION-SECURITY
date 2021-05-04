@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.*;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -15,7 +16,7 @@ public class CertificatePinningDemo {
     private static final Logger logger = LoggerFactory.getLogger(CertificatePinningDemo.class);
 
     public static void main(String[] args) throws Exception {
-        final String hostname = "https://www.udemy.com";
+        final String hostname = "https://www.packtpub.com";
 
         SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
 
@@ -26,7 +27,9 @@ public class CertificatePinningDemo {
 
         KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
 
-        trustStore.load(CertificatePinningDemo.class.getResourceAsStream("keystore"), "changeit".toCharArray());
+        final InputStream keyStore = new FileInputStream("src/main/resources/keystore");
+
+        trustStore.load(keyStore, "changeit".toCharArray());
 
         trustManagerFactory.init(trustStore);
 
@@ -37,6 +40,8 @@ public class CertificatePinningDemo {
         final HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 
         urlConnection.setSSLSocketFactory(sslContext.getSocketFactory());
+        urlConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) " +
+                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36");
 
         connectAndValidate(urlConnection);
 
