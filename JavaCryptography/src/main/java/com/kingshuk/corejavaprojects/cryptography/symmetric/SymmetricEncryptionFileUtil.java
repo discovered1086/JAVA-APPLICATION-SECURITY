@@ -15,6 +15,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -57,10 +58,11 @@ public class SymmetricEncryptionFileUtil {
         cipher.init(Cipher.DECRYPT_MODE, secretKey, generateInitializationVector());
         try (InputStream inputStream = Files.newInputStream(encryptedFilePath);
              CipherInputStream cipherInputStream = new CipherInputStream(inputStream, cipher);
-             OutputStream outputStream = Files.newOutputStream(decryptedFilePath)) {
+             OutputStream outputStream = Base64.getEncoder().wrap(Files.newOutputStream(decryptedFilePath))) {
             final byte[] bytes = new byte[1024];
-            while ((cipherInputStream.read(bytes)) != -1) {
-                outputStream.write(bytes);
+            int read;
+            while ((read = cipherInputStream.read(bytes)) > -1) {
+                outputStream.write(bytes, 0, read);
             }
             logger.info("Encryption of the file completed");
         } catch (IOException e) {
