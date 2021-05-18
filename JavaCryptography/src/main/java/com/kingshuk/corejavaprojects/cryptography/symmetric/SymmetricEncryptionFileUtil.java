@@ -24,6 +24,7 @@ public class SymmetricEncryptionFileUtil {
     private static final String ALGORITHM = "AES";
     private static final String CIPHER_NAME = "AES/CBC/PKCS5PADDING";
     private SecretKey secretKey;
+    private IvParameterSpec ivParameterSpec;
 
     public void encryptFile(Path originalFilePath, Path encryptedFilePath)
             throws NoSuchPaddingException, NoSuchAlgorithmException,
@@ -33,7 +34,12 @@ public class SymmetricEncryptionFileUtil {
         if (Objects.isNull(secretKey)) {
             secretKey = generateSecretKey();
         }
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, generateInitializationVector());
+
+        if(Objects.isNull(ivParameterSpec)){
+            ivParameterSpec = generateInitializationVector();
+        }
+
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParameterSpec);
         try (InputStream inputStream = Files.newInputStream(originalFilePath);
              OutputStream outputStream = Files.newOutputStream(encryptedFilePath);
              CipherOutputStream cipherOutputStream = new CipherOutputStream(outputStream, cipher)) {
@@ -55,7 +61,12 @@ public class SymmetricEncryptionFileUtil {
         if (Objects.isNull(secretKey)) {
             secretKey = generateSecretKey();
         }
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, generateInitializationVector());
+
+        if(Objects.isNull(ivParameterSpec)){
+            ivParameterSpec = generateInitializationVector();
+        }
+
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, ivParameterSpec);
         try (InputStream inputStream = Files.newInputStream(encryptedFilePath);
              CipherInputStream cipherInputStream = new CipherInputStream(inputStream, cipher);
              OutputStream outputStream = Files.newOutputStream(decryptedFilePath)) {
