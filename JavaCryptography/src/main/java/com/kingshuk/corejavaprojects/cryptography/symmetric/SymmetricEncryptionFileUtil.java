@@ -15,10 +15,10 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.Objects;
 
 @NoArgsConstructor
+@SuppressWarnings("java:S6212")
 public class SymmetricEncryptionFileUtil {
     private static final Logger logger = LoggerFactory.getLogger(SymmetricEncryptionFileUtil.class);
     private static final String ALGORITHM = "AES";
@@ -30,7 +30,7 @@ public class SymmetricEncryptionFileUtil {
             InvalidAlgorithmParameterException, InvalidKeyException {
         //Then we generate and initialize the cipher
         Cipher cipher = Cipher.getInstance(CIPHER_NAME);
-        if(Objects.isNull(secretKey)){
+        if (Objects.isNull(secretKey)) {
             secretKey = generateSecretKey();
         }
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, generateInitializationVector());
@@ -38,8 +38,8 @@ public class SymmetricEncryptionFileUtil {
              OutputStream outputStream = Files.newOutputStream(encryptedFilePath);
              CipherOutputStream cipherOutputStream = new CipherOutputStream(outputStream, cipher)) {
             final byte[] bytes = new byte[1024];
-            while ((inputStream.read(bytes)) != -1) {
-                cipherOutputStream.write(bytes);
+            for (int length = inputStream.read(bytes); length != -1; length = inputStream.read(bytes)) {
+                cipherOutputStream.write(bytes, 0, length);
             }
             logger.info("Encryption of the file completed");
         } catch (IOException e) {
@@ -52,17 +52,16 @@ public class SymmetricEncryptionFileUtil {
             InvalidAlgorithmParameterException, InvalidKeyException {
         //Then we generate and initialize the cipher
         Cipher cipher = Cipher.getInstance(CIPHER_NAME);
-        if(Objects.isNull(secretKey)){
+        if (Objects.isNull(secretKey)) {
             secretKey = generateSecretKey();
         }
         cipher.init(Cipher.DECRYPT_MODE, secretKey, generateInitializationVector());
         try (InputStream inputStream = Files.newInputStream(encryptedFilePath);
              CipherInputStream cipherInputStream = new CipherInputStream(inputStream, cipher);
-             OutputStream outputStream = Base64.getEncoder().wrap(Files.newOutputStream(decryptedFilePath))) {
+             OutputStream outputStream = Files.newOutputStream(decryptedFilePath)) {
             final byte[] bytes = new byte[1024];
-            int read;
-            while ((read = cipherInputStream.read(bytes)) > -1) {
-                outputStream.write(bytes, 0, read);
+            for (int length = cipherInputStream.read(bytes); length != -1; length = cipherInputStream.read(bytes)) {
+                outputStream.write(bytes, 0, length);
             }
             logger.info("Encryption of the file completed");
         } catch (IOException e) {
